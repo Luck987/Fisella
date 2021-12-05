@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+
+
+namespace ejercicio_01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Int16> lista = new List<Int16>();
+            Int16 n =0;
+            Int16 x;
+
+            lista.Add(15);
+            lista.Add(20);
+            lista.Add(8);
+            lista.Add(10);
+            lista.Add(23);
+            lista.Add(18);
+
+            
+            for (x = 0; x < lista.Count; x++)
+            {
+                if (lista[x] == 10)
+                {
+                    lista.Insert(x, n);
+                    break;
+                }
+            }
+
+            
+            for (x = 0; x < lista.Count; x++)
+            {
+                Console.WriteLine(lista[x]);
+            }
+
+            Console.ReadKey();
+
+        }
+     }
+}
