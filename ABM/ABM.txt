@@ -1,0 +1,233 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace abm
+{
+    class Persona
+    {
+        public string nombre;
+        public Int16 edad;
+
+        public Persona(string nom, Int16 num)
+        {
+            nombre = nom;
+            edad = num;
+        }
+    }
+    class Program
+    {
+        static Persona p, e;
+        static List<Persona> listaDePersonas = new List<Persona>();
+
+        static void agregar()
+        {
+            Console.SetCursorPosition(10, 0);
+            Console.Write("Ingrese el nombre de la nueva persona: ");
+            string nuevo = Console.ReadLine();
+            Console.SetCursorPosition(10, 2);
+            Console.Write("Ingrese la edad de la nueva persona: ");
+            Int16 anios = Int16.Parse(Console.ReadLine());
+            p = new Persona(nuevo, anios);
+            listaDePersonas.Add(p);
+            Console.SetCursorPosition(10, 4);
+            Console.Write("Operación completada");
+            Console.SetCursorPosition(16, 6);
+            Console.Write("Presiona cualquier tecla para volver");
+            Console.ReadKey();
+        }
+
+        static void Promedio()
+        {
+            int suma = 0;
+            int i = 10;
+            foreach (Persona item in listaDePersonas)
+            {
+                i++;
+                suma = suma + item.edad;
+                Console.SetCursorPosition(10, i);
+                Console.Write("{0} tiene {1} anios", item.nombre, item.edad);
+            }
+            Console.SetCursorPosition(10, i + 1);
+            Console.Write("El promedio de edad es {0}", (float)suma / listaDePersonas.Count);
+            Console.SetCursorPosition(10, i + 1);
+            Console.Write("Operación completada");
+            Console.SetCursorPosition(16, 24);
+            Console.Write("Presiona cualquier tecla para volver");
+            Console.ReadKey();
+        }
+
+        static Persona buscar(string n)
+        {
+            Persona encontro = null;
+            foreach (Persona persona in listaDePersonas)
+            {
+                if (persona.nombre == n)
+                {
+                    encontro = persona;
+                }
+            }
+            return encontro;
+        }
+
+        static void Listado()
+        {
+            Console.SetCursorPosition(10, 10);
+            int i = 10;
+            foreach (Persona per in listaDePersonas)
+            {
+                i++;
+                Console.SetCursorPosition(10, i);
+                Console.Write("{0} tiene {1}", per.nombre, per.edad);
+            }
+            Console.SetCursorPosition(10, i + 1);
+            Console.Write("Operación completada");
+            Console.SetCursorPosition(16, 2);
+            Console.Write("Presiona cualquier tecla para volver");
+            Console.ReadKey();
+        }
+
+        static void Main(string[] args)
+        {
+           
+            Int16 opcion;
+            bool comienzo = true;
+            //Lista con 3 personas
+            p = new Persona("Lucas", 19);
+            listaDePersonas.Add(p);
+            p = new Persona("Brandon", 17);
+            listaDePersonas.Add(p);
+            p = new Persona("Gary", 19);
+            listaDePersonas.Add(p);
+            p = new Persona("Eduardo", 16);
+            listaDePersonas.Add(p);
+            p = new Persona("Gabriel", 22);
+            listaDePersonas.Add(p);
+            while (comienzo)
+            {
+                Console.Clear();
+                Console.SetCursorPosition(10, 0);
+                Console.Write("Elija una de las opciones: ");
+                Console.SetCursorPosition(10, 2);
+                Console.Write("-OPCION 1 Ingreso de nuevas personas");
+                Console.SetCursorPosition(10, 4);
+                Console.Write("-OPCION 2 Modificación de Persona");
+                Console.SetCursorPosition(10, 6);
+                Console.Write("-OPCION 3 Eliminación de Persona");
+                Console.SetCursorPosition(10, 8);
+                Console.Write("-OPCION 4 Informe el promedio de edad");
+                Console.SetCursorPosition(10, 10);
+                Console.Write("-OPCION 5 Listado Completo");
+                Console.SetCursorPosition(10, 12);
+                Console.Write("-OPCION 6 Salir");
+                Console.SetCursorPosition(10, 14);
+                opcion = Int16.Parse(Console.ReadLine());
+                if (0 == opcion && opcion <= 7)
+                {
+                    Console.Clear();
+                    Console.SetCursorPosition(10, 0);
+                    Console.Write("El numero ingresado no pertence a una función");
+                    Console.SetCursorPosition(10, 2);
+                    Console.Write("Presiona cualquier tecla para volver");
+                    Console.ReadKey();
+                }
+/*                if (opcion == string){
+                    Console.Clear();
+                    Console.Write("Tiene que teclear un numero");;
+                    Console.Write("Presiona cualquier tecla para volver");
+                    Console.ReadKey();
+                }
+*/                
+                switch (opcion)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.SetCursorPosition(10, 0);
+                        Console.Write("Ha elegido la opción 1");
+                        agregar();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Console.SetCursorPosition(10, 0);
+                        Console.Write("Ha elegido la opción 2");
+                        Console.SetCursorPosition(10, 2);
+                        Console.Write("Ingrese el nombre de la persona que desea modificar: ");
+                        string a = Console.ReadLine();
+                        e = buscar(a);
+                        if (e != null)
+                        {
+                            Console.SetCursorPosition(10, 4);
+                            Console.Write("Ingrese el nuevo nombre: ");
+                            string s = Console.ReadLine();
+                            e.nombre = s;
+                            Console.SetCursorPosition(10, 6);
+                            Console.Write("Ingrese la nueva edad: ");
+                            Int16 t = Int16.Parse(Console.ReadLine());
+                            e.edad = t;
+                            Console.SetCursorPosition(10, 8);
+                            Console.Write("Operación completada");
+                            Console.SetCursorPosition(10, 10);
+                            Console.Write("Presiona cualquier tecla para volver");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.SetCursorPosition(10, 4);
+                            Console.Write("No lo encontre");
+                            Console.SetCursorPosition(10, 6);
+                            Console.Write("Presiona cualquier tecla para volver");
+                            Console.ReadKey();
+                        }
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Console.SetCursorPosition(10, 0);
+                        Console.Write("Ha elegido la opción 3");
+                        Console.SetCursorPosition(10, 2);
+                        Console.Write("Ingrese el nombre de la persona que desea modificar: ");
+                        string b = Console.ReadLine();
+                        e = buscar(b);
+                        if (e != null)
+                        {
+                            listaDePersonas.Remove(e);
+                            Console.SetCursorPosition(10, 4);
+                            Console.Write("Operacion Completada");
+                            Console.SetCursorPosition(10, 6);
+                            Console.Write("Presiona cualquier tecla para volver");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.SetCursorPosition(10, 4);
+                            Console.Write("No lo encontre");
+                            Console.SetCursorPosition(10, 6);
+                            Console.Write("Presiona cualquier tecla para volver");
+                            Console.ReadKey();
+                        }
+                        break;
+                    case 4:
+                        Console.Clear();
+                        Console.SetCursorPosition(10, 0);
+                        Console.Write("Ha elegido la opción 4");
+                        Promedio();
+                        break;
+                    case 5:
+                        Console.Clear();
+                        Console.SetCursorPosition(10, 0);
+                        Console.Write("Ha elegido la opción 5");
+                        Listado();
+                        break;
+                    case 6:
+                        Console.Clear();
+                        Console.SetCursorPosition(10, 0);
+                        Console.Write("Ha elegido la opción 6. Hasta Pronto ");
+                        comienzo = false;
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+    }
+}
